@@ -3,15 +3,18 @@ import { useEffect } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
+import trackGLB from "../src/models/track.glb";
+import trackColorMap from "../src/textures/track.png";
+
 export function Track() {
     // useLoader: custom hook automatically suspends component until all the assets have been downloaded. 
     // p1 appears to be a three.js GLTF or .glb 3d file loader.  p2 path to the asset.
     const result = useLoader(
         GLTFLoader,
-        process.env.PUBLIC_URL + "/models/track.glb");
+        process.env.PUBLIC_URL + trackGLB);
     
         // another useLoader custom hook. p1 textureloader. p2 a .png 
-    const colorMap = useLoader(TextureLoader, process.env.PUBLIC_URL + "/textures/track.png");
+    const colorMap = useLoader(TextureLoader, process.env.PUBLIC_URL + trackColorMap);
     
     // anisotropy property set to 16. anisotrophy helps the filtering of the texture when we are
     // looking at it from grazing angles. This model was made in blender, the texture was made in
