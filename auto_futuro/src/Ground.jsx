@@ -28,9 +28,14 @@ export function Ground() {
         gridMap.anisotropy = 16;
     }, [gridMap]);
 
+    const meshRef = useRef(null);
+    useEffect(() => {
+        var uvs = meshRef.current.geometry.attributes.uv.array;
+        meshRef.current.geometry.setAttribute("uv2", new BufferAttribute(uvs, 2));
+    }, [meshRef.current]);
+
     return (
         <>
-        {*/ standard mesh, applying a GEOMETRY and a MATERIAL. */}
         <mesh
             ref={meshRef}
             position={[-2.285, -0.015, -1.325]}
@@ -38,9 +43,11 @@ export function Ground() {
             rotation-z={-0.079}
         >
         <circleGeometry args={[6.12, 50]} />
+
         <MeshReflectorMaterial />
 
         </mesh>
+
         </>
     );
 }

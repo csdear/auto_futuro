@@ -1,6 +1,7 @@
 {
   "name": "auto_futuro",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@react-three/cannon": "^6.4.0",
