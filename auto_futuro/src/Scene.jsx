@@ -10,6 +10,7 @@ import envMapHdr from "../src/textures/envmap.hdr"
 import { Suspense } from "react";
 import { Track } from "./Track";
 import { Ground } from "./Ground";
+import { Car } from "./Car";
 
 export function Scene() {
     return (
@@ -24,6 +25,7 @@ export function Scene() {
 
                 <Track />
                 <Ground />
+                <Car />
         </Suspense>
     )
 }
