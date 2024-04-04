@@ -1,7 +1,8 @@
-import { useBox } from "@react-three/cannon";
+import { useBox, useRaycastVehicle } from "@react-three/cannon";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useWheels } from "./useWheels";
 
 import carGLB from "../src/models/car.glb";
 
@@ -29,15 +30,16 @@ export function Car() {
     useRef(null),
     );
 
-    // const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
-    // const [vehicle, vehicleApi] = useRaycastVehicle(
-    //     () => ({
-    //         chassisBody,
-    //         wheelInfos,
-    //         wheels,
-    //     }),
-    //     useRef(null),
-    //     );
+    const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
+
+    const [vehicle, vehicleApi] = useRaycastVehicle(
+        () => ({
+            chassisBody,
+            wheelInfos,
+            wheels,
+        }),
+        useRef(null),
+        );
 
 
     useEffect(() => {
@@ -46,10 +48,12 @@ export function Car() {
     }, [mesh]);
 
     return (
-        // <primitive object={mesh} rotation-y={Math.PI} />
+        <group ref={vehicle} name="vehicle">
+        {/* <primitive object={mesh} rotation-y={Math.PI} position={[0, -0.09, 0]} />  */}
         <mesh ref={chassisBody}>
             <meshBasicMaterial transparent={true} opacity={0.3} />
             <boxGeometry args={chassisBodyArgs} />
         </mesh>
+        </group>
     );
 }
